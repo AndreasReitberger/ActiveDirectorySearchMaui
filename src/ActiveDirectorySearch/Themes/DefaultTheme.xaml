@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--<?xaml-comp compile="true" ?>-->
+<ResourceDictionary
+    x:Class="AndreasReitberger.ActiveDirectorySearch.Themes.DefaultTheme"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
+    xmlns:local="clr-namespace:AndreasReitberger.ActiveDirectorySearch.Themes"
+    
+    xmlns:shared="clr-namespace:AndreasReitberger.Shared;assembly=SharedMauiXamlStylesLibrary"
+    >
+    <!--xmlns:syncfusion="clr-namespace:AndreasReitberger.Shared.Syncfusion;assembly=SharedMauiXamlStylesLibrary.Syncfusion"-->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Themes/DefaultColors.xaml" />
+        <ResourceDictionary Source="/Themes/ItemTemplates/ListViewItemTemplates.xaml" />
+
+        <!-- Override colors 
+        <syncfusion:Fonts />
+        <syncfusion:Styles />
+        <syncfusion:Templates />-->
+        <shared:DefaultTheme/>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

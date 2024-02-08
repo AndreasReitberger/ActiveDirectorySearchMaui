@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="AndreasReitberger.ActiveDirectorySearch.MainPage"
+    
+    xmlns:viewModels="clr-namespace:AndreasReitberger.ActiveDirectorySearch.ViewModels"        
+    xmlns:converters="clr-namespace:AndreasReitberger.Shared.Core.Converters;assembly=SharedMauiCoreLibrary"
+    
+    xmlns:icons="clr-namespace:AndreasReitberger.Shared.FontIcons;assembly=SharedMauiXamlStylesLibrary"
+    xmlns:localization="clr-namespace:AndreasReitberger.ActiveDirectorySearch.Resources.Localization"
+    
+    Style="{StaticResource DefaultPageStyle}"
+    x:DataType="viewModels:MainPageViewModel"
+    >
+    <ContentPage.Resources>
+        <converters:BooleanReverseVisibilityConverter x:Key="BooleanReverseVisibilityConverter" />
+        <converters:ByteArrayToImageConverter x:Key="ByteArrayToImageConverter" />
+    </ContentPage.Resources>
+
+    <Shell.TitleView>
+        <Grid
+            ColumnDefinitions="*,Auto"
+            ColumnSpacing="8"
+            >
+            <Label
+                Margin="8,2"
+                Text="{x:Static localization:Strings.ProgramName}"
+                Style="{StaticResource MediumLabelStyle}"
+                VerticalTextAlignment="Center"
+                />
+            <!-- Your Logo 
+            <Image
+                HeightRequest="40"
+                Grid.Column="1"
+                Source="logo.png"
+                Aspect="AspectFit"
+                />
+            -->
+        </Grid>
+    </Shell.TitleView>
+
+    <Grid
+        RowDefinitions="Auto,*"
+        >
+        <Border
+            Margin="4,8"
+            Style="{StaticResource MinimalPanelCardViewBorderStyle}"
+            >
+            <Grid
+                Margin="4,8"
+                ColumnDefinitions="Auto,*,Auto"
+                RowDefinitions="*,*"
+                >
+                <Label 
+                    Margin="4,8"
+                    Grid.RowSpan="2"
+                    Style="{StaticResource LabelStyle}"
+                    VerticalTextAlignment="Center"
+                    Text="{x:Static localization:Strings.SearchText}"
+                    >
+                </Label>
+                <!-- 
+                    IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanReverseVisibilityConverter}}"
+                -->
+                <Entry
+                    Margin="2"
+                    VerticalOptions="Center"
+                    HorizontalOptions="FillAndExpand"
+                    Grid.Column="1"
+                    Text="{Binding SearchText}"
+                    />
+                <Label
+                    IsVisible="{Binding LoadUsersFromAdCommand, Converter={StaticResource BooleanReverseVisibilityConverter}}"
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    Margin="2"
+                    Text="{x:Static localization:Strings.EnterAtLeastThreeCharsForSearchTextDots}"
+                    TextColor="{StaticResource Red}"
+                    Style="{StaticResource VerySmallLabelStyle}"
+                    />
+
+                <Button
+                    Grid.RowSpan="2"
+                    Style="{StaticResource MaterialDesignIconButtonStyle}"
+                    Margin="4,0"
+                    Grid.Column="2"
+                    Text="{x:Static icons:MaterialIcons.Reload}"
+                    Command="{Binding RefreshCommand}"
+                    TextColor="{StaticResource White}"
+                    Background="{StaticResource PrimaryColor}"
+                    />
+            </Grid>
+        </Border>
+
+        <Grid
+            Grid.Row="1"
+            >
+            <CollectionView
+                Margin="8"
+                ItemSizingStrategy="MeasureAllItems"
+                ItemsSource="{Binding Users}"
+                ItemTemplate="{StaticResource DataTemplate.Custom.User.Default}"
+               >
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout
+                        Span="2"
+                        Orientation="Vertical"
+                        HorizontalItemSpacing="5"
+                        VerticalItemSpacing="5"
+                        />
+                </CollectionView.ItemsLayout>
+            </CollectionView>
+        </Grid>
+
+        <ActivityIndicator
+            IsVisible="{Binding IsBusy}"
+            Grid.RowSpan="2"
+            Background="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray900}}"
+            Opacity="0.75"
+            IsRunning="{Binding IsBusy}"
+            />
+    </Grid>
+</ContentPage>

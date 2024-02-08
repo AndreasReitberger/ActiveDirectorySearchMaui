@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--<?xaml-comp compile="true" ?>-->
+<ResourceDictionary
+    x:Class="AndreasReitberger.ActiveDirectorySearch.Themes.ItemTemplates.ListViewItemTemplates"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
+    xmlns:local="clr-namespace:AndreasReitberger.ActiveDirectorySearch.Themes.ItemTemplates"
+    
+    xmlns:ad="clr-namespace:AndreasReitberger.ActiveDirectorySearch.Models.ActiveDirectory"
+    xmlns:localization="clr-namespace:AndreasReitberger.ActiveDirectorySearch.Resources.Localization"
+    xmlns:icons="clr-namespace:AndreasReitberger.Shared.FontIcons;assembly=SharedMauiXamlStylesLibrary"
+    xmlns:shared="clr-namespace:AndreasReitberger.Shared;assembly=SharedMauiXamlStylesLibrary"
+    >
+    <DataTemplate x:Key="DataTemplate.Custom.User.Default" x:DataType="ad:ActiveDirectoryUser">
+        <Border
+            Margin="4" 
+            Style="{StaticResource MinimalPanelCardViewBorderStyle}"
+            >
+            <Grid 
+                Padding="4" 
+                Margin="1"
+                ColumnDefinitions="48,*,Auto,Auto,Auto"
+                RowDefinitions="Auto,Auto"
+                >
+                <Label 
+                    Margin="3.5,0,0,0"
+                    FontSize="Large"
+                    Grid.RowSpan="2"
+                    VerticalTextAlignment="Center"
+                    HorizontalTextAlignment="Center"
+                    >
+                    <Label.Style>
+                        <Style TargetType="Label" BasedOn="{StaticResource MaterialFontFamilyIconLabelStyle}">
+                            <Setter Property="Text" Value="{x:Static icons:MaterialIcons.AccountOutline}" />
+                            <Setter Property="TextColor" Value="{StaticResource Green}" />
+                        </Style>
+                    </Label.Style>
+                </Label>
+
+                <Label
+                    Grid.Column="1"
+                    Margin="16,2"
+                    Style="{StaticResource MediumLabelStyle}"
+                    HorizontalTextAlignment="Start"
+                    >
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding Lastname}" />
+                            <Span Text=", " />
+                            <Span Text="{Binding Firstname}" />
+                            <Span Text=" (" FontSize="Default" />
+                            <Span Text="{Binding UserName}" FontSize="Default" />
+                            <Span Text=")" FontSize="Default" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    Margin="16,2"
+                    Style="{StaticResource VerySmallLabelStyle}"
+                    HorizontalTextAlignment="Start"
+                    >
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static icons:MaterialIcons.EmailOutline}" FontFamily="{StaticResource MaterialDesignIcons}" />
+                            <Span Text="  " />
+                            <Span Text="{Binding Email}" />
+                            <Span Text="&#x0d;&#x0a;" />
+                            <Span Text="{x:Static icons:MaterialIcons.PhoneOutline}" FontFamily="{StaticResource MaterialDesignIcons}" />
+                            <Span Text="  " />
+                            <Span Text="{Binding Phone}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                
+                <Button 
+                    Grid.Column="2"
+                    Grid.Row="1"
+                    Style="{StaticResource RoundMaterialDesignIconButtonStyle}"
+                    Text="{x:Static icons:MaterialIcons.PhoneOutline}"
+                    Command="{Binding BindingContext.CopyPhoneCommand, Source={x:RelativeSource AncestorType={x:Type CollectionView}, AncestorLevel=1}}"
+                    CommandParameter="{Binding .}"
+                    TextColor="{StaticResource White}"
+                    Background="{StaticResource Green}"
+                    Margin="4"
+                    HorizontalOptions="End"
+                    />
+                
+                <Button 
+                    Grid.Column="3"
+                    Grid.Row="1"
+                    Style="{StaticResource RoundMaterialDesignIconButtonStyle}"
+                    Text="{x:Static icons:MaterialIcons.EmailOutline}"
+                    Command="{Binding BindingContext.CopyMailCommand, Source={x:RelativeSource AncestorType={x:Type CollectionView}, AncestorLevel=1}}"
+                    CommandParameter="{Binding .}"
+                    TextColor="{StaticResource White}"
+                    Background="{StaticResource Orange}"
+                    Margin="4"
+                    HorizontalOptions="Start"
+                    />
+                
+                <Button 
+                    Grid.Column="4"
+                    Grid.Row="1"
+                    Style="{StaticResource RoundMaterialDesignIconButtonStyle}"
+                    Text="{x:Static icons:MaterialIcons.MicrosoftTeams}"
+                    Command="{Binding BindingContext.OpenInTeamsCommand, Source={x:RelativeSource AncestorType={x:Type CollectionView}, AncestorLevel=1}}"
+                    CommandParameter="{Binding .}"
+                    TextColor="{StaticResource White}"
+                    Background="Purple"
+                    Margin="4"
+                    HorizontalOptions="Start"
+                    />
+                
+                <Label
+                    Grid.Column="2"
+                    Grid.ColumnSpan="3"
+                    Margin="16,2"
+                    Style="{StaticResource VerySmallLabelStyle}"
+                    HorizontalTextAlignment="Start"
+                    VerticalTextAlignment="End"
+                    >
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static icons:MaterialIcons.OfficeBuildingOutline}" FontFamily="{StaticResource MaterialDesignIcons}" />
+                            <Span Text="  " />
+                            <Span Text="{Binding Plant, FallbackValue={x:Static localization:Strings.NoData}}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </Grid>
+        </Border>
+    </DataTemplate>
+</ResourceDictionary>
