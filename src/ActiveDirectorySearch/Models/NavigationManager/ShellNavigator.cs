@@ -1,10 +1,9 @@
-﻿using AndreasReitberger.Core.Utilities;
-using AndreasReitberger.Shared.Core.Interfaces;
-using CommunityToolkit.Mvvm.ComponentModel;
-using AndreasReitberger.ActiveDirectorySearch.Enums;
+﻿using AndreasReitberger.ActiveDirectorySearch.Enums;
 using AndreasReitberger.ActiveDirectorySearch.Models.Dispatch;
 using AndreasReitberger.ActiveDirectorySearch.Models.EventLogger;
 using AndreasReitberger.ActiveDirectorySearch.Resources.Localization;
+using AndreasReitberger.Shared.Core.Interfaces;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace AndreasReitberger.ActiveDirectorySearch.Models.NavigationManager
 {
@@ -14,7 +13,7 @@ namespace AndreasReitberger.ActiveDirectorySearch.Models.NavigationManager
     /// Changed: Yes
     /// License: Apache-2.0 (https://github.com/AndreasReitberger/MauiAppBasement/blob/main/LICENSE)
     /// </summary>
-    public partial class ShellNavigator : BaseModel, IShellNavigator
+    public partial class ShellNavigator : ObservableObject, IShellNavigator
     {
         #region Instance
         static ShellNavigator _instance = null;

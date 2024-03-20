@@ -14,7 +14,7 @@
     <DataTemplate x:Key="DataTemplate.Custom.User.Default" x:DataType="ad:ActiveDirectoryUser">
         <Border
             Margin="4" 
-            Style="{StaticResource MinimalPanelCardViewBorderStyle}"
+            Style="{StaticResource Style.Core.Border.MinimalPanelCardView}"
             >
             <Grid 
                 Padding="4" 
@@ -30,7 +30,7 @@
                     HorizontalTextAlignment="Center"
                     >
                     <Label.Style>
-                        <Style TargetType="Label" BasedOn="{StaticResource MaterialFontFamilyIconLabelStyle}">
+                        <Style TargetType="Label" BasedOn="{StaticResource Style.Core.Label.Icon.MaterialDesign}">
                             <Setter Property="Text" Value="{x:Static icons:MaterialIcons.AccountOutline}" />
                             <Setter Property="TextColor" Value="{StaticResource Green}" />
                         </Style>
@@ -40,7 +40,7 @@
                 <Label
                     Grid.Column="1"
                     Margin="16,2"
-                    Style="{StaticResource MediumLabelStyle}"
+                    Style="{StaticResource Style.Core.Label.Medium}"
                     HorizontalTextAlignment="Start"
                     >
                     <Label.FormattedText>
@@ -59,7 +59,7 @@
                     Grid.Column="1"
                     Grid.Row="1"
                     Margin="16,2"
-                    Style="{StaticResource VerySmallLabelStyle}"
+                    Style="{StaticResource Style.Core.Label.Small}"
                     HorizontalTextAlignment="Start"
                     >
                     <Label.FormattedText>
@@ -74,11 +74,11 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-                
+
                 <Button 
                     Grid.Column="2"
                     Grid.Row="1"
-                    Style="{StaticResource RoundMaterialDesignIconButtonStyle}"
+                    Style="{StaticResource Style.Core.Button.IconRound.MaterialDesign}"
                     Text="{x:Static icons:MaterialIcons.PhoneOutline}"
                     Command="{Binding BindingContext.CopyPhoneCommand, Source={x:RelativeSource AncestorType={x:Type CollectionView}, AncestorLevel=1}}"
                     CommandParameter="{Binding .}"
@@ -86,12 +86,16 @@
                     Background="{StaticResource Green}"
                     Margin="4"
                     HorizontalOptions="End"
-                    />
+                    >
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroupList />
+                    </VisualStateManager.VisualStateGroups>
+                </Button>
                 
                 <Button 
                     Grid.Column="3"
                     Grid.Row="1"
-                    Style="{StaticResource RoundMaterialDesignIconButtonStyle}"
+                    Style="{StaticResource Style.Core.Button.IconRound.MaterialDesign}"
                     Text="{x:Static icons:MaterialIcons.EmailOutline}"
                     Command="{Binding BindingContext.CopyMailCommand, Source={x:RelativeSource AncestorType={x:Type CollectionView}, AncestorLevel=1}}"
                     CommandParameter="{Binding .}"
@@ -99,12 +103,16 @@
                     Background="{StaticResource Orange}"
                     Margin="4"
                     HorizontalOptions="Start"
-                    />
+                    >
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroupList />
+                    </VisualStateManager.VisualStateGroups>
+                </Button>
                 
                 <Button 
                     Grid.Column="4"
                     Grid.Row="1"
-                    Style="{StaticResource RoundMaterialDesignIconButtonStyle}"
+                    Style="{StaticResource Style.Core.Button.IconRound.MaterialDesign}"
                     Text="{x:Static icons:MaterialIcons.MicrosoftTeams}"
                     Command="{Binding BindingContext.OpenInTeamsCommand, Source={x:RelativeSource AncestorType={x:Type CollectionView}, AncestorLevel=1}}"
                     CommandParameter="{Binding .}"
@@ -112,13 +120,17 @@
                     Background="Purple"
                     Margin="4"
                     HorizontalOptions="Start"
-                    />
+                    >
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroupList />
+                    </VisualStateManager.VisualStateGroups>
+                </Button>
                 
                 <Label
                     Grid.Column="2"
                     Grid.ColumnSpan="3"
                     Margin="16,2"
-                    Style="{StaticResource VerySmallLabelStyle}"
+                    Style="{StaticResource Style.Core.Label.Small}"
                     HorizontalTextAlignment="Start"
                     VerticalTextAlignment="End"
                     >

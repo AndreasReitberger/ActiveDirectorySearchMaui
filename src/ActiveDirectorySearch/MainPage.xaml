@@ -10,7 +10,7 @@
     xmlns:icons="clr-namespace:AndreasReitberger.Shared.FontIcons;assembly=SharedMauiXamlStylesLibrary"
     xmlns:localization="clr-namespace:AndreasReitberger.ActiveDirectorySearch.Resources.Localization"
     
-    Style="{StaticResource DefaultPageStyle}"
+    Style="{StaticResource Style.Core.ContentPage.Default}"
     x:DataType="viewModels:MainPageViewModel"
     >
     <ContentPage.Resources>
@@ -26,7 +26,7 @@
             <Label
                 Margin="8,2"
                 Text="{x:Static localization:Strings.ProgramName}"
-                Style="{StaticResource MediumLabelStyle}"
+                Style="{StaticResource Style.Core.Label.Medium}"
                 VerticalTextAlignment="Center"
                 />
             <!-- Your Logo 
@@ -45,7 +45,7 @@
         >
         <Border
             Margin="4,8"
-            Style="{StaticResource MinimalPanelCardViewBorderStyle}"
+            Style="{StaticResource Style.Core.Border.MinimalPanelCardView}"
             >
             <Grid
                 Margin="4,8"
@@ -55,7 +55,7 @@
                 <Label 
                     Margin="4,8"
                     Grid.RowSpan="2"
-                    Style="{StaticResource LabelStyle}"
+                    Style="{StaticResource Style.Core.Label.Default}"
                     VerticalTextAlignment="Center"
                     Text="{x:Static localization:Strings.SearchText}"
                     >
@@ -77,12 +77,12 @@
                     Margin="2"
                     Text="{x:Static localization:Strings.EnterAtLeastThreeCharsForSearchTextDots}"
                     TextColor="{StaticResource Red}"
-                    Style="{StaticResource VerySmallLabelStyle}"
+                    Style="{StaticResource Style.Core.Label.Small}"
                     />
 
                 <Button
                     Grid.RowSpan="2"
-                    Style="{StaticResource MaterialDesignIconButtonStyle}"
+                    Style="{StaticResource Style.Core.Button.IconPrimary.MaterialDesign}"
                     Margin="4,0"
                     Grid.Column="2"
                     Text="{x:Static icons:MaterialIcons.Reload}"
