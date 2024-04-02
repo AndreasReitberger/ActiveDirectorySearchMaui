@@ -65,7 +65,7 @@ public partial class App : Application
         base.OnSleep();
         if (SettingsApp.SettingsChanged)
         {
-            DispatchManager.Dispatch(Dispatcher, SettingsApp.SaveSettingsAsync);
+            DispatchManager.Dispatch(Dispatcher, async () => await SettingsApp.SaveSettingsAsync());
         }
         //WeakReferenceMessenger.Default.Send(new AppStateChangedMessage(State));
     }
