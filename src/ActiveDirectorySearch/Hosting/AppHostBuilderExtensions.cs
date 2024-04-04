@@ -34,13 +34,9 @@ namespace AndreasReitberger.ActiveDirectorySearch.Hosting
         /// <returns>MauiAppBuilder</returns>
         public static MauiAppBuilder RegisterMainViewModels(this MauiAppBuilder builder)
         {
-            /*
             builder.Services.AddSingleton<BaseViewModel>();
-            builder.Services.AddSingleton<KlipperBaseViewModel>();
-            builder.Services.AddSingleton<KlipperFullBaseViewModel>();
-            */
-            // Loading
-            //builder.Services.AddSingleton<LoadingPageViewModel>();
+            builder.Services.AddSingleton<AppViewModel>();
+            
             // Main view models
             builder.Services.AddSingleton<MainPageViewModel>();
             return builder;
