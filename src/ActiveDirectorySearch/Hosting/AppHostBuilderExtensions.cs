@@ -1,5 +1,6 @@
 ﻿using AndreasReitberger.ActiveDirectorySearch.Models.NavigationManager;
 using AndreasReitberger.ActiveDirectorySearch.ViewModels;
+using AndreasReitberger.Shared.Core;
 
 namespace AndreasReitberger.ActiveDirectorySearch.Hosting
 {
@@ -34,6 +35,7 @@ namespace AndreasReitberger.ActiveDirectorySearch.Hosting
         /// <returns>MauiAppBuilder</returns>
         public static MauiAppBuilder RegisterMainViewModels(this MauiAppBuilder builder)
         {
+            builder.Services.AddSingleton<ViewModelBase>();
             builder.Services.AddSingleton<BaseViewModel>();
             builder.Services.AddSingleton<AppViewModel>();
             
