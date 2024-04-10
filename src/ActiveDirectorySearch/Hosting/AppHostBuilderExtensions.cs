@@ -49,6 +49,7 @@ namespace AndreasReitberger.ActiveDirectorySearch.Hosting
             // Loading
             //builder.Services.AddSingleton<LoadingPage>();
             // Main view models
+            builder.Services.AddSingleton<AppShell>();
             builder.Services.AddSingleton<MainPage>();
             return builder;
         }

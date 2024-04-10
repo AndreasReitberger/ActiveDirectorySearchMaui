@@ -50,6 +50,8 @@
 		<WindowsAppSdkDeploymentManagerInitialize Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">false</WindowsAppSdkDeploymentManagerInitialize>
 		<!-- set false to build an exe file instead -->
 		<GenerateAppxPackageOnBuild>false</GenerateAppxPackageOnBuild>
+		<!-- Workaround:  https://github.com/dotnet/maui/issues/20677 
+		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>-->
 		<!--
 		<AppxBundle>Always</AppxBundle>
 		<AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
@@ -62,10 +64,11 @@
 		<AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
 	</PropertyGroup>
 	
-	<!-- Signing -->
+	<!-- Singing -->
 	<PropertyGroup>
-		<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+		<AppxPackageSigningEnabled>true</AppxPackageSigningEnabled>
 		<PackageCertificateThumbprint>874C34D76D0750519E23E065A42F0EE1268C31D6</PackageCertificateThumbprint>
+		<AppxPackageSigningTimestampServerUrl>http://sha256timestamp.ws.symantec.com/sha256/timestamp</AppxPackageSigningTimestampServerUrl>
 		<AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
 	</PropertyGroup>
 	
@@ -89,7 +92,8 @@
 	
 	<!-- https://learn.microsoft.com/en-us/dotnet/maui/windows/deployment/publish-cli -->
 	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(Configuration)' == 'Release'">
-		<AppxPackageSigningEnabled>true</AppxPackageSigningEnabled>
+		<AppxPackageSigningEnabled>true</AppxPackageSigningEnabled>		
+		<AppxPackageSigningTimestampServerUrl>http://sha256timestamp.ws.symantec.com/sha256/timestamp</AppxPackageSigningTimestampServerUrl>
 		<PackageCertificateThumbprint>874C34D76D0750519E23E065A42F0EE1268C31D6</PackageCertificateThumbprint>
 		<AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
 	</PropertyGroup>
@@ -113,6 +117,10 @@
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+	  
+	<ItemGroup>
+	  <None Remove="Resources\Fonts\materialdesignicons-webfont.ttf" />
 	</ItemGroup>
 
 	<ItemGroup>
