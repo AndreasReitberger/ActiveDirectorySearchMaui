@@ -36,17 +36,39 @@
 		<AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
 		<GenerateTestArtifacts>True</GenerateTestArtifacts>
 		<HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+
+		<!-- Here you can choose if you want to build as executable or as package -->
+		<!----><DefineConstants>$(DefineConstants);WinBuild_Exe</DefineConstants>
+		<!--<DefineConstants>$(DefineConstants);WinBuild_Package</DefineConstants>-->
 	</PropertyGroup>
 
-	<PropertyGroup>
+	<!-- Windows build settings for Windows (Executable)-->
+	<PropertyGroup Condition="'$(DefineConstants.Contains(WinBuild_Exe))'">
 		<!-- https://stackoverflow.com/a/75589936/10083577 -->
-		<!--<WindowsPackageType Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">None</WindowsPackageType>-->
+		<WindowsPackageType Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">None</WindowsPackageType>
+		<WindowsAppSDKSelfContained Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">true</WindowsAppSDKSelfContained>
+		<WindowsAppSdkDeploymentManagerInitialize Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">false</WindowsAppSdkDeploymentManagerInitialize>
 		<!-- set false to build an exe file instead -->
+		<GenerateAppxPackageOnBuild>false</GenerateAppxPackageOnBuild>
+		<!-- Workaround:  https://github.com/dotnet/maui/issues/20677 
+		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>-->
+		<!--
+		<AppxBundle>Always</AppxBundle>
+		<AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
+		-->
+	</PropertyGroup>
+	<!-- Windows build settings for Windows (Package)-->
+	<PropertyGroup Condition="'$(DefineConstants.Contains(WinBuild_Package))'">
 		<GenerateAppxPackageOnBuild>true</GenerateAppxPackageOnBuild>
 		<AppxBundle>Always</AppxBundle>
 		<AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-		<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+	</PropertyGroup>
+	
+	<!-- Singing -->
+	<PropertyGroup>
+		<AppxPackageSigningEnabled>true</AppxPackageSigningEnabled>
 		<PackageCertificateThumbprint>874C34D76D0750519E23E065A42F0EE1268C31D6</PackageCertificateThumbprint>
+		<AppxPackageSigningTimestampServerUrl>http://sha256timestamp.ws.symantec.com/sha256/timestamp</AppxPackageSigningTimestampServerUrl>
 		<AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
 	</PropertyGroup>
 	
@@ -70,19 +92,14 @@
 	
 	<!-- https://learn.microsoft.com/en-us/dotnet/maui/windows/deployment/publish-cli -->
 	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(Configuration)' == 'Release'">
-		<AppxPackageSigningEnabled>true</AppxPackageSigningEnabled>
+		<AppxPackageSigningEnabled>true</AppxPackageSigningEnabled>		
+		<AppxPackageSigningTimestampServerUrl>http://sha256timestamp.ws.symantec.com/sha256/timestamp</AppxPackageSigningTimestampServerUrl>
 		<PackageCertificateThumbprint>874C34D76D0750519E23E065A42F0EE1268C31D6</PackageCertificateThumbprint>
 		<AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
 	</PropertyGroup>
 	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(RuntimeIdentifierOverride)' != ''">
 		<RuntimeIdentifier>$(RuntimeIdentifierOverride)</RuntimeIdentifier>
 	</PropertyGroup>
-	<!-- Windows specifics
-	Ref: https://github.com/dotnet/maui/issues/15802#issuecomment-1995905743
-	-->
-	<ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
-		<PackageReference Include="Microsoft.Graphics.Win2D" Version="1.2.0" />
-	</ItemGroup>
 	  
 	<ItemGroup>
 		<!-- App Icon -->
@@ -101,17 +118,21 @@
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
+	  
+	<ItemGroup>
+	  <None Remove="Resources\Fonts\materialdesignicons-webfont.ttf" />
+	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.10" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.10" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.20" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.20" />
 		<PackageReference Include="nulastudio.NetBeauty" Version="2.1.4.4" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-		<PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="8.0.1" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="SettingsMaui" Version="1.0.5" />
-		<PackageReference Include="SharedMauiXamlStylesLibrary" Version="1.2.4" />
+		<PackageReference Include="SettingsMaui" Version="1.0.6" />
+		<PackageReference Include="SharedMauiXamlStylesLibrary" Version="1.2.7" />
 		<PackageReference Include="System.Net.Sockets" Version="4.3.0" />
 		<PackageReference Include="System.DirectoryServices" Version="8.0.0" />
 	</ItemGroup>

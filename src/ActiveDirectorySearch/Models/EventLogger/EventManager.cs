@@ -116,7 +116,7 @@ namespace AndreasReitberger.ActiveDirectorySearch.Models.EventLogger
                     Events.Add(new AppErrorEvent()
                     {
                         Message = exception.Message,
-                        Exceptio = DebugLogger.GetLastInnerException(exception),
+                        Exception = DebugLogger.GetLastInnerException(exception),
                         Level = ErrorLevel.Critical,
                         Type = (int)ErrorType.UnhandledException,
                     });
