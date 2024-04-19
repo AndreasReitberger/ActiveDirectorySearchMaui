@@ -121,18 +121,6 @@
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
-	  
-	<ItemGroup>
-	  <None Remove="Resources\Fonts\FluentFontIcons.ttf" />
-	  <None Remove="Resources\Fonts\FontAwesome5Brands.otf" />
-	  <None Remove="Resources\Fonts\FontAwesome5Regular.otf" />
-	  <None Remove="Resources\Fonts\FontAwesome5Solid.otf" />
-	  <None Remove="Resources\Fonts\materialdesignicons-webfont.ttf" />
-	  <None Remove="Resources\Fonts\Montserrat-Bold.ttf" />
-	  <None Remove="Resources\Fonts\Montserrat-Medium.ttf" />
-	  <None Remove="Resources\Fonts\Montserrat-Regular.ttf" />
-	  <None Remove="Resources\Fonts\Montserrat-SemiBold.ttf" />
-	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.20" />
@@ -143,7 +131,7 @@
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="SettingsMaui" Version="1.0.6" />
-		<PackageReference Include="SharedMauiXamlStylesLibrary" Version="1.2.7" />
+		<PackageReference Include="SharedMauiXamlStylesLibrary" Version="1.2.8" />
 		<PackageReference Include="System.Net.Sockets" Version="4.3.0" />
 		<PackageReference Include="System.DirectoryServices" Version="8.0.0" />
 	</ItemGroup>
