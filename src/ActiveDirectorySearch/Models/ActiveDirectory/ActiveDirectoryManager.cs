@@ -62,7 +62,7 @@ namespace AndreasReitberger.ActiveDirectorySearch.Models.ActiveDirectory
             return result;
         }
 
-        public static ActiveDirectoryUser GetUserFromActiveDirectory(string userNameWildcard)
+        public static ActiveDirectoryUser? GetUserFromActiveDirectory(string userNameWildcard)
         {
             List<ActiveDirectoryUser> users = GetUsersFromActiveDirectory(userNameWildcard);
             return users?.FirstOrDefault();

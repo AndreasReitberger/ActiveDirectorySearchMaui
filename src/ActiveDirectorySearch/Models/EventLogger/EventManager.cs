@@ -22,7 +22,7 @@ namespace AndreasReitberger.ActiveDirectorySearch.Models.EventLogger
     public partial class EventManager : ObservableObject, IEventManager
     {
         #region Instance
-        static EventManager _instance = null;
+        static EventManager? _instance = null;
         static readonly object Lock = new();
         /// <summary>
         /// A static instance of the <c>EventManager</c>
@@ -45,7 +45,6 @@ namespace AndreasReitberger.ActiveDirectorySearch.Models.EventLogger
                     _instance = value;
                 }
             }
-
         }
         #endregion
 
@@ -80,7 +79,7 @@ namespace AndreasReitberger.ActiveDirectorySearch.Models.EventLogger
         /// </summary>
         public EventManager()
         {
-            Dispatcher = Application.Current.Dispatcher;
+            Dispatcher = Application.Current?.Dispatcher;
         }
         /// <summary>
         /// Ctor to pass a <c>Dispatcher</c>

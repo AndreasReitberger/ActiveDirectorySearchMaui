@@ -26,7 +26,7 @@ namespace AndreasReitberger.ActiveDirectorySearch.ViewModels
         {
             base.RegisterMessages();
             if (!WeakReferenceMessenger.Default.IsRegistered<SettingsChangedMessage>(this))
-                WeakReferenceMessenger.Default.Register<SettingsChangedMessage>(this, async (r, m) =>
+                WeakReferenceMessenger.Default.Register<SettingsChangedMessage>(this, (r, m) =>
                 {
                     try
                     {
@@ -35,7 +35,7 @@ namespace AndreasReitberger.ActiveDirectorySearch.ViewModels
                             Message = $"WeakReferenceMessenger received from {r}: (message =>  {m})",
                             SourceName = nameof(SettingsChangedMessage),
                         });
-                        await OnSettingsChangedMessageReceived(m.Value);
+                        OnSettingsChangedMessageReceived(m.Value);
                     }
                     catch (Exception exc)
                     {
@@ -59,7 +59,7 @@ namespace AndreasReitberger.ActiveDirectorySearch.ViewModels
         #endregion
 
         #region Messages
-        new async Task OnSettingsChangedMessageReceived(SettingsApp settings)
+        new void OnSettingsChangedMessageReceived(SettingsApp settings)
         {
             try
             {
