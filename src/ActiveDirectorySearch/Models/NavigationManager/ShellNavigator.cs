@@ -16,7 +16,7 @@ namespace AndreasReitberger.ActiveDirectorySearch.Models.NavigationManager
     public partial class ShellNavigator : ObservableObject, IShellNavigator
     {
         #region Instance
-        static ShellNavigator _instance = null;
+        static ShellNavigator? _instance = null;
         static readonly object Lock = new();
         public static ShellNavigator Instance
         {
@@ -28,7 +28,6 @@ namespace AndreasReitberger.ActiveDirectorySearch.Models.NavigationManager
                 }
                 return _instance;
             }
-
             set
             {
                 if (_instance == value) return;
@@ -37,7 +36,6 @@ namespace AndreasReitberger.ActiveDirectorySearch.Models.NavigationManager
                     _instance = value;
                 }
             }
-
         }
         #endregion
 
@@ -52,10 +50,10 @@ namespace AndreasReitberger.ActiveDirectorySearch.Models.NavigationManager
         string rootPage = string.Empty;
 
         [ObservableProperty]
-        List<string> availableEntryPages = new()
-        {
+        List<string> availableEntryPages =
+        [
             nameof(MainPage),
-        };
+        ];
 
         #endregion
 
@@ -98,7 +96,7 @@ namespace AndreasReitberger.ActiveDirectorySearch.Models.NavigationManager
         /// <param name="delay">A delay in ms for the navigation</param>
         /// <param name="animate">Whether to animate the navigation</param>
         /// <returns><c>Task</c></returns>
-        public Task<bool> GoToAsync(IDispatcher dispatcher, ShellRoute target, Dictionary<string, object> parameters, bool flyoutIsPresented = false, int delay = -1, bool animate = true)
+        public Task<bool> GoToAsync(IDispatcher? dispatcher, ShellRoute target, Dictionary<string, object>? parameters, bool flyoutIsPresented = false, int delay = -1, bool animate = true)
             => GoToAsync(dispatcher, target.ToString(), parameters, flyoutIsPresented, delay, animate);
 
         /// <summary>
@@ -110,7 +108,7 @@ namespace AndreasReitberger.ActiveDirectorySearch.Models.NavigationManager
         /// <param name="delay">A delay in ms for the navigation</param>
         /// <param name="animate">Whether to animate the navigation</param>
         /// <returns><c>Task</c></returns>
-        public async Task<bool> GoToAsync(IDispatcher dispatcher, string target, Dictionary<string, object> parameters, bool flyoutIsPresented = false, int delay = -1, bool animate = true)
+        public async Task<bool> GoToAsync(IDispatcher? dispatcher, string target, Dictionary<string, object>? parameters, bool flyoutIsPresented = false, int delay = -1, bool animate = true)
         {
             try
             {
@@ -127,8 +125,6 @@ namespace AndreasReitberger.ActiveDirectorySearch.Models.NavigationManager
                 {
                     await Task.Delay(50);
                 }
-
-                //await DispatchManager.UpdateUIThreadSaveAsync(async () =>
                 await DispatchManager.DispatchAsync(dispatcher, async () =>
                 {
                     try
@@ -162,7 +158,7 @@ namespace AndreasReitberger.ActiveDirectorySearch.Models.NavigationManager
         /// <param name="animate">Whether to animate the navigation</param>
         /// <param name="confirm">Whether to confirm the navigation</param>
         /// <returns><c>Task</c></returns>
-        public Task GoBackAsync(IDispatcher dispatcher, bool flyoutIsPresented = false, int delay = -1, bool animate = true, bool confirm = false)
+        public Task GoBackAsync(IDispatcher? dispatcher, bool flyoutIsPresented = false, int delay = -1, bool animate = true, bool confirm = false)
             => GoBackAsync(dispatcher, null, flyoutIsPresented: flyoutIsPresented, delay: delay, animate: animate, confirm: confirm);
 
         /// <summary>
@@ -174,7 +170,7 @@ namespace AndreasReitberger.ActiveDirectorySearch.Models.NavigationManager
         /// <param name="animate">Whether to animate the navigation</param>
         /// <param name="confirm">Whether to confirm the navigation</param>
         /// <returns></returns>
-        public async Task GoBackAsync(IDispatcher dispatcher, Dictionary<string, object> parameters, bool flyoutIsPresented = false, int delay = -1, bool animate = true, bool confirm = false)
+        public async Task GoBackAsync(IDispatcher? dispatcher, Dictionary<string, object>? parameters, bool flyoutIsPresented = false, int delay = -1, bool animate = true, bool confirm = false)
         {
             if (confirm)
             {
@@ -225,8 +221,8 @@ namespace AndreasReitberger.ActiveDirectorySearch.Models.NavigationManager
                 ShellNavigationState state = Shell.Current.CurrentState;
                 if (state == null) return string.Empty;
 
-                string lastPart = state.Location.ToString().Split('/').Where(x => !string.IsNullOrWhiteSpace(x)).LastOrDefault();
-                return lastPart;
+                string? lastPart = state.Location.ToString().Split('/').Where(x => !string.IsNullOrWhiteSpace(x)).LastOrDefault();
+                return lastPart ?? string.Empty;
             }
             catch (Exception exc)
             {

@@ -6,21 +6,28 @@ namespace AndreasReitberger.ActiveDirectorySearch.Models.ActiveDirectory
     {
         #region Properties
         [ObservableProperty]
-        string userName;
+        string userName = string.Empty;
+
         [ObservableProperty]
-        string unit;
+        string unit = string.Empty;
+
         [ObservableProperty]
-        string email;
+        string email = string.Empty;
+
         [ObservableProperty]
-        string firstname;
+        string firstname = string.Empty;
+
         [ObservableProperty]
-        string lastname;
+        string lastname = string.Empty;
+
         [ObservableProperty]
-        string status;
+        string status = string.Empty;
+
         [ObservableProperty]
-        string phone;
+        string phone = string.Empty;
+
         [ObservableProperty]
-        string plant;
+        string plant = string.Empty;
         #endregion
 
         #region Constructor
@@ -33,7 +40,7 @@ namespace AndreasReitberger.ActiveDirectorySearch.Models.ActiveDirectory
 
         public override int GetHashCode() => base.GetHashCode();
         
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if ((obj == null) || !GetType().Equals(obj.GetType()))
             {

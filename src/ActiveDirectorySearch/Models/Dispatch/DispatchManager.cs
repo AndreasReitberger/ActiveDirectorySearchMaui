@@ -140,7 +140,7 @@ namespace AndreasReitberger.ActiveDirectorySearch.Models.Dispatch
 #if WPF
                         action.Invoke();
 #else
-                        await action?.Invoke();
+                        await action.Invoke();
 #endif
                     }
                     catch (Exception exc)
@@ -151,7 +151,7 @@ namespace AndreasReitberger.ActiveDirectorySearch.Models.Dispatch
             }
             else
             {
-                await action?.Invoke();
+                await action.Invoke();
             }
         }
         public static async Task UpdateInNewTaskAsync(Func<Task> action)
@@ -160,7 +160,7 @@ namespace AndreasReitberger.ActiveDirectorySearch.Models.Dispatch
             {
                 try
                 {
-                    await action?.Invoke();
+                    await action.Invoke();
                 }
                 catch (Exception exc)
                 {
@@ -169,10 +169,11 @@ namespace AndreasReitberger.ActiveDirectorySearch.Models.Dispatch
             });
         }
 #if !WPF
-        public static void Dispatch(IDispatcher dispatcher, Action action, bool forceUiThread = false)
+        public static void Dispatch(IDispatcher? dispatcher, Action action, bool forceUiThread = false)
         {
-            if (dispatcher.IsDispatchRequired || forceUiThread)
+            if (dispatcher?.IsDispatchRequired is true || forceUiThread)
             {
+                ArgumentNullException.ThrowIfNull(dispatcher);
                 dispatcher.Dispatch(() =>
                 {
                     try
@@ -190,10 +191,11 @@ namespace AndreasReitberger.ActiveDirectorySearch.Models.Dispatch
                 action?.Invoke();
             }
         }
-        public static void Dispatch(IDispatcher dispatcher, Func<Task> action, bool forceUiThread = false)
+        public static void Dispatch(IDispatcher? dispatcher, Func<Task> action, bool forceUiThread = false)
         {
-            if (dispatcher.IsDispatchRequired || forceUiThread)
+            if (dispatcher?.IsDispatchRequired is true || forceUiThread)
             {
+                ArgumentNullException.ThrowIfNull(dispatcher);
                 dispatcher.Dispatch(() =>
                 {
                     try
@@ -211,10 +213,11 @@ namespace AndreasReitberger.ActiveDirectorySearch.Models.Dispatch
                 action?.Invoke();
             }
         }
-        public static async Task DispatchAsync(IDispatcher dispatcher, Action action, bool forceUiThread = false)
+        public static async Task DispatchAsync(IDispatcher? dispatcher, Action action, bool forceUiThread = false)
         {
-            if (dispatcher.IsDispatchRequired || forceUiThread)
+            if (dispatcher?.IsDispatchRequired is true|| forceUiThread)
             {
+                ArgumentNullException.ThrowIfNull(dispatcher);
                 await dispatcher.DispatchAsync(() =>
                 {
                     try
@@ -232,15 +235,16 @@ namespace AndreasReitberger.ActiveDirectorySearch.Models.Dispatch
                 action?.Invoke();
             }
         }
-        public static async Task DispatchAsync(IDispatcher dispatcher, Func<Task> action, bool forceUiThread = false)
+        public static async Task DispatchAsync(IDispatcher? dispatcher, Func<Task> action, bool forceUiThread = false)
         {
-            if (dispatcher.IsDispatchRequired || forceUiThread)
+            if (dispatcher?.IsDispatchRequired is true || forceUiThread)
             {
+                ArgumentNullException.ThrowIfNull(dispatcher);
                 await dispatcher.DispatchAsync(async () =>
                 {
                     try
                     {
-                        await action?.Invoke();
+                        await action.Invoke();
                     }
                     catch (Exception exc)
                     {
@@ -250,7 +254,7 @@ namespace AndreasReitberger.ActiveDirectorySearch.Models.Dispatch
             }
             else
             {
-                await action?.Invoke();
+                await action.Invoke();
             }
         }
 #endif

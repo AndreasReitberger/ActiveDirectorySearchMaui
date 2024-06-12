@@ -1,10 +1,7 @@
-﻿using AndreasReitberger.Shared.Core.Theme;
-using AndreasReitberger.Shared.Enums;
-using CommunityToolkit.Mvvm.Messaging;
-using AndreasReitberger.ActiveDirectorySearch.Models.Dispatch;
-using AndreasReitberger.ActiveDirectorySearch.Models.EventLogger;
+﻿using AndreasReitberger.ActiveDirectorySearch.Models.Dispatch;
 using AndreasReitberger.ActiveDirectorySearch.Models.Settings;
 using AndreasReitberger.ActiveDirectorySearch.Utilities;
+using AndreasReitberger.Shared.Core.Theme;
 
 namespace AndreasReitberger.ActiveDirectorySearch;
 
@@ -13,8 +10,8 @@ public partial class App : Application
 
     #region Properties
 
-    ThemeColorInfo _themeColor;
-    public ThemeColorInfo ThemeColor
+    ThemeColorInfo? _themeColor;
+    public ThemeColorInfo? ThemeColor
     {
         get => _themeColor;
         set
